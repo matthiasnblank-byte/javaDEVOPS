@@ -1,0 +1,27 @@
+{
+  "name": "javadevops",
+  "version": "1.0.0",
+  "description": "```bash\r mvn spring-boot:run\r ```",
+  "main": "index.js",
+  "scripts": {
+    "test": ":",
+    "build": ":",
+    "start": ":"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthiasnblank-byte/javaDEVOPS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matthiasnblank-byte/javaDEVOPS/issues"
+  },
+  "homepage": "https://github.com/matthiasnblank-byte/javaDEVOPS#readme",
+  "devDependencies": {
+    "@angular-devkit/core": "~20.1.0",
+    "@nx/angular": "^21.3.11"
+  },
+  "dependencies": {}
+}

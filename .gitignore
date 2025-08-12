@@ -1,0 +1,16 @@
+
+.nx/installation
+.nx/cache
+.nx/workspace-data
+node_modules
+
+.angular
+
+# Angular/Cypress build artifacts
+dist
+frontend/dist
+frontend/.angular
+frontend/node_modules
+frontend/.cypress-cache
+frontend/cypress/videos
+frontend/cypress/screenshots
