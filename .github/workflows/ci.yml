@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  backend:
+    name: Backend (Maven tests)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Build & Test
+        run: mvn -B -ntp -DskipTests=false test
+
+  frontend:
+    name: Frontend (Unit + Cypress E2E)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Setup Chrome
+        id: chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Unit tests (Karma/Jasmine)
+        run: npm run test -- --watch=false --browsers=ChromeHeadlessNoSandbox
+        env:
+          CI: true
+          CHROME_BIN: ${{ steps.chrome.outputs.chrome-path }}
+
+      - name: E2E tests (Cypress)
+        run: npx --yes start-server-and-test "npm start -- --port 4200" http://localhost:4200 "npm run e2e"
+        env:
+          CI: true
+
