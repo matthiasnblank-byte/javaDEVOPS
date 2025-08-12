@@ -1,0 +1,5 @@
+com\example\devops\todo\TodoService.class
+com\example\devops\todo\TodoController.class
+com\example\devops\todo\Todo.class
+com\example\devops\todo\TodoRepository.class
+com\example\devops\Application.class
