@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.example.devops.todo.TodoE2ETest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 65.77 s -- in com.example.devops.todo.TodoE2ETest
