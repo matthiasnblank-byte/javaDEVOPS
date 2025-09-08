@@ -1,0 +1,18 @@
+[33mcommit 982c8dd0f832cab3137d658a5691e000804cdc62[m
+Author: Matthias Blank <Matthias.Blank2@gmx.net>
+Date:   Tue Aug 12 20:56:16 2025 +0200
+
+    ```text
+    ci: GitHub Actions für Backend- und Frontend-Tests hinzufügen
+    
+    - Workflow `.github/workflows/ci.yml` angelegt
+    - Trigger: push (alle Branches) und pull_request
+    - Backend-Job: Java 17, Maven `test`
+    - Frontend-Job: Node 20, `npm ci`, Unit-Tests (Karma/Jasmine, ChromeHeadless)
+    - Chrome in CI via browser-actions/setup-chrome konfiguriert (CHROME_BIN)
+    - E2E (Cypress) über `start-server-and-test`: `npm start` → http://localhost:4200 → `npm run e2e`
+    - E2E nutzt Network-Stubs; kein laufendes Backend im CI erforderlich
+    ```
+
+ .github/workflows/ci.yml | 60 [32m++++++++++++++++++++++++++++++++++++++++++++++++[m
+ 1 file changed, 60 insertions(+)
