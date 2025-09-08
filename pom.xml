@@ -17,6 +17,12 @@
 
   <properties>
     <java.version>17</java.version>
+    <!-- SonarCloud -->
+    <sonar.projectKey>matthiasnblank-byte_javaDEVOPS</sonar.projectKey>
+    <sonar.organization>matthiasnblank-byte</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <!-- JaCoCo -->
+    <jacoco.version>0.8.11</jacoco.version>
   </properties>
 
   <dependencies>
@@ -61,8 +67,35 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+      
+      <!-- JaCoCo für Code Coverage -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      
+      <!-- SonarCloud Scanner -->
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.10.0.2594</version>
+      </plugin>
     </plugins>
   </build>
 
 </project>
-
