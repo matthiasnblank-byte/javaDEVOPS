@@ -89,7 +89,8 @@ Nach erfolgreichem Setup:
 
 ## 📋 Konfigurierte Features:
 
-### Backend (Spring Boot):
+### Backend (Spring Boot): 
+
 - ✅ JaCoCo Code Coverage
 - ✅ Maven Surefire Test Reports
 - ✅ Security Vulnerability Scanning
