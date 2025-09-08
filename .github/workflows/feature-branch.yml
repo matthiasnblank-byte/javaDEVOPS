@@ -1,0 +1,55 @@
+name: Feature Branch Workflow
+
+on:
+  push:
+    branches:
+      - 'feat/**'
+      - 'feature/**'
+      - 'bugfix/**'
+      - 'hotfix/**'
+
+jobs:
+  feature-validation:
+    name: Feature Branch Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Feature Branch Analysis
+        run: |
+          echo "🔍 Analyzing Feature Branch: ${{ github.ref_name }}"
+          echo "📊 Branch type: $(echo ${{ github.ref_name }} | cut -d'/' -f1)"
+          echo "📝 Feature name: $(echo ${{ github.ref_name }} | cut -d'/' -f2-)"
+
+      - name: Check Branch Naming Convention
+        run: |
+          BRANCH_NAME="${{ github.ref_name }}"
+          if [[ $BRANCH_NAME =~ ^(feat|feature|bugfix|hotfix)\/[a-z0-9-]+$ ]]; then
+            echo "✅ Branch naming follows convention"
+          else
+            echo "❌ Branch naming violation: Use feat/, feature/, bugfix/, or hotfix/ prefix"
+            exit 1
+          fi
+
+      - name: Commit Message Validation
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          if [[ $COMMIT_MSG =~ ^(feat|fix|docs|style|refactor|test|chore): ]]; then
+            echo "✅ Commit message follows convention"
+          else
+            echo "⚠️ Warning: Commit message should start with feat:, fix:, docs:, etc."
+          fi
+
+  notify-feature-status:
+    name: Feature Development Notification
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [feature-validation]
+    steps:
+      - name: Feature Status Summary
+        run: |
+          echo "🚀 Feature Branch Workflow Summary"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Status: ${{ needs.feature-validation.result }}"

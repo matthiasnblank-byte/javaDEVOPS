@@ -2,8 +2,10 @@ name: CI
 
 on:
   push:
-    branches: ['**']
+    branches: ['**']  # Alle Branches
   pull_request:
+    branches: [main, develop]  # PRs zu main/develop
+  workflow_dispatch:  # Manueller Trigger
 
 jobs:
   backend:
@@ -83,3 +85,25 @@ jobs:
         with:
           projectBaseDir: frontend
 
+  # Zusätzlicher Job für Feature-Branch spezifische Aktionen
+  feature-branch-check:
+    name: Feature Branch Validation
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/heads/feat/') || startsWith(github.ref, 'refs/heads/feature/')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Feature Branch Info
+        run: |
+          echo "🚀 Running on Feature Branch: ${{ github.ref_name }}"
+          echo "📊 Branch type: Feature Development"
+          echo "✅ Running full test suite including SonarCloud analysis"
+
+      - name: Validate Branch Naming
+        run: |
+          if [[ "${{ github.ref_name }}" =~ ^(feat|feature)\/[a-z0-9-]+$ ]]; then
+            echo "✅ Branch naming follows convention"
+          else
+            echo "⚠️ Warning: Branch naming doesn't follow feat/xxx or feature/xxx pattern"
+          fi
