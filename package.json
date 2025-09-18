@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/matthiasnblank-byte/javaDEVOPS#readme",
   "devDependencies": {
-    "@angular-devkit/core": "~20.1.0",
+    "@angular-devkit/core": "~20.3.0",
     "@nx/angular": "^21.3.11"
   },
   "dependencies": {}
