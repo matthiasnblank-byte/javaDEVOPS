@@ -22,7 +22,7 @@
     <sonar.organization>matthiasnblank-byte</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <!-- JaCoCo -->
-    <jacoco.version>0.8.11</jacoco.version>
+    <jacoco.version>0.8.13</jacoco.version>
   </properties>
 
   <dependencies>
